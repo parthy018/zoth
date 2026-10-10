@@ -43,3 +43,6 @@ next-env.d.ts
 # documentation
 docs
 
+# design 
+DESIGN.md
+
