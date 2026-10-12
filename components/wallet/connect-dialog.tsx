@@ -45,9 +45,11 @@ export function ConnectDialog({
           <DialogTitle className="text-lg font-medium text-white">{copy.title}</DialogTitle>
           <DialogDescription className="text-zoth-text-muted">{copy.description}</DialogDescription>
         </DialogHeader>
+
         <div className="border border-dashed border-zoth-border p-6 text-center text-sm text-zoth-muted">
           Placeholder content
         </div>
+
         <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
           <ActionButton variant="outline" onClick={() => setOpen(false)}>
             Close
@@ -65,3 +67,4 @@ export function ConnectDialog({
     </Dialog>
   )
 }
+

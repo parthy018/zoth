@@ -14,3 +14,5 @@ export async function GET(request: Request) {
 
   return NextResponse.json(getSale(), { headers: { "Cache-Control": "no-store" } })
 }
+
+

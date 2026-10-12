@@ -10,5 +10,13 @@ async function fetchSale(): Promise<Sale> {
 }
 
 export function useSale() {
-  return useQuery({ queryKey: ["sale"], queryFn: fetchSale })
+  return useQuery({
+    queryKey: ["sale"],
+    queryFn: fetchSale,
+    staleTime: 4_000,
+    refetchInterval: 8_000, // Polls every 8s to reflect simulated real-time activity
+    refetchIntervalInBackground: false,
+  })
 }
+
+

@@ -19,11 +19,11 @@ function SaleCardSkeleton() {
       </div>
       <Skeleton className="h-1.5 w-full bg-zoth-brown" />
       <div className="grid grid-cols-2 gap-3">
-        <Skeleton className="h-[84px] bg-zoth-brown" />
-        <Skeleton className="h-[84px] bg-zoth-brown" />
+        <Skeleton className="h-21 bg-zoth-brown" />
+        <Skeleton className="h-21 bg-zoth-brown" />
       </div>
-      <Skeleton className="h-[76px] w-full bg-zoth-brown" />
-      <Skeleton className="h-[72px] w-full bg-zoth-brown" />
+      <Skeleton className="h-19 w-full bg-zoth-brown" />
+      <Skeleton className="h-18 w-full bg-zoth-brown" />
     </div>
   )
 }
@@ -36,14 +36,20 @@ export function SaleCard() {
   }, [isError])
 
   if (isPending) return <SaleCardSkeleton />
-  if (isError) return <SaleError onRetry={() => refetch()} className="min-h-[300px]" />
+  if (isError) return <SaleError onRetry={() => refetch()} className="min-h-75" />
 
   return (
     <section aria-label={data.title} className="space-y-5">
       <div>
         <div className="flex items-end justify-between gap-4">
           <div className="min-w-0">
-            <p className="text-xs text-zoth-text-muted">Total Sale</p>
+            <div className="flex items-center gap-2">
+              <p className="text-xs text-zoth-text-muted">Total Sale</p>
+              <span className="inline-flex items-center gap-1 rounded border border-emerald-500/30 bg-emerald-500/10 px-1.5 py-0.5 text-[9px] font-semibold tracking-wider text-emerald-400 uppercase">
+                <span className="size-1.5 animate-pulse rounded-full bg-emerald-400" />
+                Live
+              </span>
+            </div>
             <p className="mt-1 text-3xl leading-none font-medium tracking-tight sm:text-[40px]">
               {formatUsd(data.totalSale)}
             </p>
