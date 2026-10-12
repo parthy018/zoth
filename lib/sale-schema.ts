@@ -10,6 +10,15 @@ export const saleSchema = z.object({
   subscription: z.number().nonnegative(),
   progress: z.number().min(0).max(100),
   closesAt: z.iso.datetime(),
+  allocations: z.array(
+    z.object({
+      label: z.string(),
+      subscription: z.number().nonnegative(),
+      progress: z.number().min(0).max(100),
+      raised: z.number().nonnegative(),
+      cap: z.number().positive(),
+    })
+  ),
   launchpad: z.string(),
   purchaseMethod: z.string(),
   applications: z.number().int().nonnegative(),

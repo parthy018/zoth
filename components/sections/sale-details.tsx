@@ -2,28 +2,28 @@
 
 import type { ReactNode } from "react"
 import { toast } from "sonner"
-import {
-  CircleDollarSign,
-  Clock,
-  Lock,
-  Rocket,
-  ShieldQuestion,
-  Target,
-  Users,
-} from "lucide-react"
+import { CircleDollarSign, Lock, Rocket, Target, Users } from "lucide-react"
 import { Skeleton } from "@/components/ui/skeleton"
-import { Table, TableBody, TableCaption, TableCell, TableRow } from "@/components/ui/table"
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableRow,
+} from "@/components/ui/table"
 import { SaleError } from "@/components/sale/sale-error"
 import { Reveal } from "@/components/sections/reveal"
-import { useCountdown } from "@/hooks/use-countdown"
 import { useSale } from "@/hooks/use-sale"
-import { formatNumber, formatUsd, pad2 } from "@/lib/format"
+import { formatNumber, formatUsd } from "@/lib/format"
 import type { Sale } from "@/lib/sale-schema"
 import { cn } from "@/lib/utils"
 
 function Timeline({ steps }: { steps: Sale["timeline"] }) {
   return (
-    <ol aria-label="Token sale timeline" className="grid grid-cols-1 gap-6 sm:grid-cols-4 sm:gap-0">
+    <ol
+      aria-label="Token sale timeline"
+      className="grid grid-cols-1 gap-6 sm:grid-cols-4 sm:gap-0"
+    >
       {steps.map((step, i) => {
         const active = step.state === "next"
         return (
@@ -36,7 +36,9 @@ function Timeline({ steps }: { steps: Sale["timeline"] }) {
                   active ? "border-zoth-orange" : "border-zoth-accent-border"
                 )}
               >
-                {active && <span className="absolute inset-[2px] rounded-full bg-zoth-orange" />}
+                {active && (
+                  <span className="absolute inset-[2px] rounded-full bg-zoth-orange" />
+                )}
               </span>
               {i < steps.length - 1 && (
                 <span
@@ -68,55 +70,41 @@ function Timeline({ steps }: { steps: Sale["timeline"] }) {
   )
 }
 
-function CountdownBoxes({ closesAt }: { closesAt: string }) {
-  const { days, hours, minutes, seconds, ready, done } = useCountdown(closesAt)
-  const parts = [days, hours, minutes, seconds]
-  const labels = ["days", "hours", "minutes", "seconds"]
-
-  return (
-    <div className="flex items-center justify-end gap-1">
-      <span className="sr-only">
-        {!ready
-          ? "Loading"
-          : done
-            ? "Sale closed"
-            : `${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`}
-      </span>
-      <div aria-hidden="true" className="flex gap-1">
-        {parts.map((value, i) => (
-          <span
-            key={labels[i]}
-            title={labels[i]}
-            className="flex h-6 min-w-6 items-center justify-center border border-zoth-accent-border bg-zoth-brown px-1 font-mono text-[11px] tabular-nums"
-          >
-            {ready ? pad2(value) : "--"}
-          </span>
-        ))}
-      </div>
-    </div>
-  )
-}
-
 function Row({
   icon,
   label,
+  nested,
+  noBorder,
   children,
 }: {
-  icon: ReactNode
+  icon?: ReactNode
   label: string
+  nested?: boolean
+  noBorder?: boolean
   children: ReactNode
 }) {
   return (
-    <TableRow className="h-11 border-zoth-border hover:bg-transparent">
+    <TableRow
+      className={cn(
+        "h-11 border-zoth-border hover:bg-transparent",
+        nested && "h-8",
+        noBorder && "border-b-0"
+      )}
+    >
       <TableCell className="px-0 text-[13px] text-zoth-text-muted">
         <span className="flex items-center gap-3">
-          <span aria-hidden="true" className="text-zoth-muted [&_svg]:size-3.5">
+          <span
+            aria-hidden="true"
+            className="w-3.5 text-zoth-muted [&_svg]:size-3.5"
+          >
             {icon}
           </span>
           {label}
         </span>
       </TableCell>
-      <TableCell className="px-0 text-right text-[13px] text-white">{children}</TableCell>
+      <TableCell className="px-0 text-right text-[13px] text-white">
+        {children}
+      </TableCell>
     </TableRow>
   )
 }
@@ -126,9 +114,6 @@ function DetailsTable({ sale }: { sale: Sale }) {
     <Table>
       <TableCaption className="sr-only">{sale.title} details</TableCaption>
       <TableBody>
-        <Row icon={<Clock />} label="Closes in">
-          <CountdownBoxes closesAt={sale.closesAt} />
-        </Row>
         <Row icon={<Rocket />} label="Launchpad">
           {sale.launchpad}
         </Row>
@@ -138,10 +123,10 @@ function DetailsTable({ sale }: { sale: Sale }) {
         <Row icon={<Users />} label="Applications">
           {formatNumber(sale.applications)}
         </Row>
-        <Row icon={<Target />} label="Target">
+        <Row icon={<Target />} label="Target" noBorder>
           {formatUsd(sale.target)}
         </Row>
-        <Row icon={<ShieldQuestion />} label="Hard cap">
+        <Row label="Hard cap" nested>
           {sale.hardCap ? (
             formatUsd(sale.hardCap)
           ) : (
@@ -151,7 +136,9 @@ function DetailsTable({ sale }: { sale: Sale }) {
         <Row icon={<Lock />} label="Unlock period">
           <button
             type="button"
-            onClick={() => toast.info("Unlock terms will be published once they are final.")}
+            onClick={() =>
+              toast.info("Unlock terms will be published once they are final.")
+            }
             className="underline underline-offset-4 transition-colors hover:text-zoth-orange"
           >
             Show terms
@@ -173,7 +160,10 @@ function ReadBeforeCommit({ links }: { links: Sale["readBeforeCommit"] }) {
       </h3>
       <ul className="mt-3">
         {links.map((l) => (
-          <li key={l.label} className="border-t border-zoth-border first:border-t-0">
+          <li
+            key={l.label}
+            className="border-t border-zoth-border first:border-t-0"
+          >
             <a
               href={l.href}
               target="_blank"
@@ -194,7 +184,11 @@ function ReadBeforeCommit({ links }: { links: Sale["readBeforeCommit"] }) {
 
 function DetailsSkeleton() {
   return (
-    <div aria-busy="true" aria-label="Loading sale details" className="space-y-6">
+    <div
+      aria-busy="true"
+      aria-label="Loading sale details"
+      className="space-y-6"
+    >
       <Skeleton className="h-14 w-full bg-zoth-brown" />
       <Skeleton className="h-[308px] w-full bg-zoth-brown" />
     </div>
@@ -219,8 +213,8 @@ export function SaleDetails() {
             Token sale details
           </h2>
           <p className="mt-4 max-w-[360px] text-[15px] leading-[1.4] text-zoth-text-muted">
-            The terms of the $ZOTH IDO on Sonar. Items marked to be confirmed are published here
-            once they are final.
+            The terms of the $ZOTH IDO on Sonar. Items marked to be confirmed
+            are published here once they are final.
           </p>
           <div className="mt-10">
             {data ? (
@@ -233,7 +227,9 @@ export function SaleDetails() {
 
         <Reveal delay={0.1} className="lg:col-span-7 lg:col-start-6">
           {isPending && <DetailsSkeleton />}
-          {isError && <SaleError onRetry={() => refetch()} className="min-h-[300px]" />}
+          {isError && (
+            <SaleError onRetry={() => refetch()} className="min-h-[300px]" />
+          )}
           {data && (
             <div className="space-y-10">
               <Timeline steps={data.timeline} />

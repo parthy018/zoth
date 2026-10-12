@@ -15,6 +15,10 @@ export function getSale(now = Date.now()): Sale {
     subscription: 2.01,
     progress: 44,
     closesAt: new Date(now + 2 * DAY + 5 * HOUR + 59 * MINUTE + 59_000).toISOString(),
+    allocations: [
+      { label: "Whitelist round", subscription: 2.4, progress: 82, raised: 300_000, cap: 125_000 },
+      { label: "Public round", subscription: 1.61, progress: 64, raised: 201_000, cap: 125_000 },
+    ],
     launchpad: "SONAR",
     purchaseMethod: "USDC",
     applications: 4_709,
