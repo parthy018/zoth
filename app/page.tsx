@@ -8,7 +8,7 @@ import { SaleDetails } from "@/components/sections/sale-details"
 export default function Home() {
   return (
     <>
-      <div className="sticky top-0 z-[70]">
+      <div className="sticky top-0 z-70">
         <TopBanner />
       </div>
       <Navbar />

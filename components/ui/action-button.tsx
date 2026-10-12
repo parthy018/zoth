@@ -1,10 +1,11 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { CornerTicks } from "@/components/ui/corner-ticks"
+import { RollingText } from "@/components/ui/rolling-text"
 import { cn } from "@/lib/utils"
 
 const actionButton = cva(
-  "group/ab relative isolate inline-flex h-[39px] min-w-[148px] items-center justify-center overflow-hidden px-8 text-[14.7px] font-medium leading-none tracking-[-0.18px] whitespace-nowrap text-white transition-colors disabled:pointer-events-none disabled:opacity-40",
+  "group group/ab relative isolate inline-flex h-[39px] min-w-[148px] items-center justify-center overflow-hidden px-8 text-[14.7px] font-medium leading-none tracking-[-0.18px] whitespace-nowrap text-white transition-colors disabled:pointer-events-none disabled:opacity-40",
   {
     variants: {
       variant: {
@@ -18,9 +19,21 @@ const actionButton = cva(
   }
 )
 
-type ActionButtonProps = React.ComponentProps<"button"> & VariantProps<typeof actionButton>
+type ActionButtonProps = React.ComponentProps<"button"> &
+  VariantProps<typeof actionButton> & {
+    animated?: boolean
+  }
 
-export function ActionButton({ className, variant, block, children, ...props }: ActionButtonProps) {
+export function ActionButton({
+  className,
+  variant,
+  block,
+  animated = true,
+  children,
+  ...props
+}: ActionButtonProps) {
+  const isText = typeof children === "string" || typeof children === "number"
+
   return (
     <button type="button" className={cn(actionButton({ variant, block }), className)} {...props}>
       {variant !== "outline" && (
@@ -30,7 +43,10 @@ export function ActionButton({ className, variant, block, children, ...props }: 
         />
       )}
       {variant === "outline" && <CornerTicks size={6} />}
-      <span className="relative">{children}</span>
+      <span className="relative">
+        {animated && isText ? <RollingText text={String(children)} /> : children}
+      </span>
     </button>
   )
 }
+
