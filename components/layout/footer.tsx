@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { NewsletterForm } from "@/components/layout/newsletter-form"
+import { FooterWatermark } from "./footer-watermark"
 
 const socials = [
   { label: "X", href: "https://x.com/zothdotio", icon: "twitter" },
@@ -31,9 +32,9 @@ const columns = [
 export function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-zoth-border bg-black">
-      <div className="mx-auto w-full max-w-[1920px] px-6 pt-16 sm:px-8 lg:px-12 xl:px-[72px] 2xl:px-[96px]">
+      <div className="mx-auto w-full max-w-[1920px] px-6 pt-16 sm:px-8 lg:px-12 xl:px-18 2xl:px-24">
         <div className="grid gap-12 lg:grid-cols-[1fr_auto] lg:gap-24">
-          <div className="max-w-[360px]">
+          <div className="max-w-90">
             <p className="text-[13px] leading-5 text-white/50">
               Participate in the $ZOTH IDO on Sonar and help shape the Zoth ecosystem.
             </p>
@@ -86,7 +87,7 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-12">
-          <p className="max-w-[760px] text-[11px] leading-4 text-white/40">
+          <p className="max-w-190 text-[11px] leading-4 text-white/40">
             Participation in token sales involves risk, including the loss of capital. Nothing on
             this page is financial advice, and availability depends on your jurisdiction. Items marked
             to be confirmed are published once they are final.
@@ -95,12 +96,7 @@ export function Footer() {
         </div>
       </div>
 
-      <p
-        aria-hidden="true"
-        className="mt-10 px-6 pb-[0.06em] text-left text-[31vw] leading-[0.85] font-bold tracking-[-0.04em] text-[#1a0a05] select-none sm:px-8 lg:px-12 xl:px-[72px] 2xl:px-[96px]"
-      >
-        <span className="text-zoth-orange">Z</span>OTH
-      </p>
+    <FooterWatermark />
     </footer>
   )
 }
