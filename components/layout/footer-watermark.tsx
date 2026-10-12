@@ -20,7 +20,7 @@ export function FooterWatermark() {
 
         // Calculate wave delay based on absolute distance from the hovered character
         const distance = isHovered ? Math.abs(index - hoveredIndex) : 0
-        const delay = isHovered ? distance * 90 : 0
+        const delay = isHovered ? distance * 120 : 0
 
         return (
           <span
