@@ -22,11 +22,11 @@ export function TopBanner() {
     <div
       role="region"
       aria-label="Announcement"
-      className="relative z-[70] flex min-h-[59px] items-center bg-zoth-orange px-4 md:px-[34px]"
+      className="relative z-70 flex min-h-14.75 items-center bg-zoth-orange px-4 md:px-8.5"
     >
       <div className="hidden md:block">{close}</div>
-      <p className="flex min-w-0 flex-1 items-center justify-between gap-2 text-[15px] leading-[21px] md:justify-center md:gap-3">
-        <span>IDO Soon.</span>
+      <p className="flex min-w-0 flex-1 items-center justify-between gap-2 text-[15px] leading-5.25 md:justify-center md:gap-3">
+        <span>Demo Soon.</span>
         <a
           href="#sale-details"
           className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap text-base underline underline-offset-2 transition-opacity hover:opacity-90"
