@@ -80,9 +80,18 @@ export function Navbar() {
             side="right"
             className="w-[min(320px,100vw)] border-l border-zoth-accent-border bg-zoth-brown-dark p-6"
           >
+            <div className="flex items-center pr-8">
+              <Image
+                src="/images/brand/zoth-logo-horizontal.svg"
+                alt="Zoth"
+                width={90}
+                height={28}
+                className="h-7 w-auto"
+              />
+            </div>
             <SheetTitle className="sr-only">Menu</SheetTitle>
             <SheetDescription className="sr-only">Site navigation</SheetDescription>
-            <nav aria-label="Mobile" className="mt-8">
+            <nav aria-label="Mobile" className="mt-6">
               <ul className="flex flex-col">
                 {links.map((l) => (
                   <li key={l.label} className="border-b border-zoth-border">
