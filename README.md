@@ -64,6 +64,7 @@ lib/
 - **Countdown.** `useCountdown` computes the remaining time from `Date.now()` on every tick, so it doesn't drift. It only starts after mount, so the server and client markup match and there is no hydration mismatch. It also resyncs when the tab becomes visible again.
 - **Mock closing time.** The mock sets `closesAt` to two days and five hours after each request (`lib/sale-data.ts`). A real API would return a fixed date, and then the countdown would stop at zero and show "closed".
 - **Progress is clamped** to 0–100% so out-of-range values can't break the bar.
+- **Navbar links.** Docs and Blogs point to the live zoth.io site (`https://docs.zoth.io/zoth/` and `https://www.zoth.io/blog`). Home and Tokenomics are in-page anchors (`#top`, `#sale-details`). The same list drives the mobile menu (`components/layout/navbar.tsx`).
 - **Connect buttons** open a shadcn Dialog with placeholder content. No Web3 code is included, as the brief asks.
 - **Accessibility.** Semantic landmarks (`header`, `nav`, `main`, `footer`), one `h1`, a skip link, visible focus rings, `aria-label`s on icon-only buttons, and `prefers-reduced-motion` respected for animations. The countdown is in a `sr-only` text element and the visual boxes are `aria-hidden`, so screen readers don't announce every second.
 - **Responsive.** Tested at 375px and at desktop widths. The partners list scrolls horizontally inside its own container, so the page itself never scrolls sideways.
